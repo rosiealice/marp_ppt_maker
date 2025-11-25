@@ -2,20 +2,23 @@
 import numbers
 import subprocess
 
+
 #-------------User Inputs----------------#
+
+type='seasonal' # Are we comparing 'obs' or 'seasonal' plots?
+
+# Where are the figures you want to organize?
+path='https://ns9560k.web.sigma2.no/datalake/diagnostics/noresm/masan/PPE/ppe_runs_landonly/ensemble_member.'
+
+# List of suffixes (in this case the members of the PPE) over which we want to loop
+ppe_numbers=['000','003','005','009','019','021','024','030','032','039','041','042','048','058','059','064','065','069','072','073']
 
 # What do you want your ppt file to be called and where do you want it to live?? 
 filename='PPE_obs_slides_251125'
 output_path='/datalake/NS9560K/www/diagnostics/noresm/rosief/marp_files/'
 
-# Where are the figures you want to organize?
-path='https://ns9560k.web.sigma2.no/datalake/diagnostics/noresm/masan/PPE/ppe_runs_landonly/ensemble_member.'
-
 # Which directory are they in? 
 subdir = 'OBS_comparison/ANN/'
-
-# List of suffixes (in this case the members of the PPE) over which we want to loop
-ppe_numbers=['000','003','005','009','019','021','024','030','032','039','041','042','048','058','059','064','065','069','072','073']
 
 # Which variables do we want to look at? (these are fragments of the names of the files)
 VARS = ['LAI_MODIS',
@@ -28,6 +31,10 @@ VARS = ['LAI_MODIS',
     'TSA_CRU4.07'
     ]
 
+if(type=='seasonal'):
+    subdir = 'seasonal_cycle/landf/'
+    VARS=['Amazonia','Global','Europe']
+    filename='PPE_seasonal_slides_251125'    
 
 #---------End of user inputs --------------#
 
