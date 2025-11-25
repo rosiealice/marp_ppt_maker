@@ -147,7 +147,7 @@ def export_pptx_from_marp(md_file, pptx_file):
                 response = requests.get(img_url)
                 image_stream = BytesIO(response.content)
                 # Add image to slide
-                slide.shapes.add_picture(image_stream, Inches(0), Inches(1), width=Inches(15))
+                slide.shapes.add_picture(image_stream, Inches(0), Inches(0.9), width=Inches(15))
 
 # Save PP
 
