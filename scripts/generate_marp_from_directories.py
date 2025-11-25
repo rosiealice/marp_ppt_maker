@@ -19,6 +19,7 @@ from urllib.parse import urlparse, urljoin
 import requests
 from bs4 import BeautifulSoup
 
+
 # Helper to extract year from filename
 
 YEAR_RE = re.compile(r'(\d{4})(?=\.png$)')
@@ -105,11 +106,14 @@ def export_pptx_from_marp(md_file, pptx_file):
 
 # Convert Markdown to HTML
     html = markdown.markdown(md_text, extensions=["extra"])
-
-# Parse HTML
+    
     soup = BeautifulSoup(html, "html.parser")
 
+
     prs = Presentation()
+    prs.slide_width = Inches(15)  # for a 16:9 ratio  
+    prs.slide_height = Inches(5)
+
     current_slide = None
     text_frame = None
 
@@ -129,7 +133,7 @@ def export_pptx_from_marp(md_file, pptx_file):
             if current_slide:
                 span = element.find('span')
                 if span:
-                    subtitle_box = current_slide.shapes.add_textbox(Inches(0.5), Inches(1), Inches(9), Inches(0.5))
+                    subtitle_box = current_slide.shapes.add_textbox(Inches(0.5), Inches(0.6), Inches(9), Inches(0.5))
                     subtitle_box.text = span.get_text()
 
         elif element.name == 'div':
@@ -143,7 +147,7 @@ def export_pptx_from_marp(md_file, pptx_file):
                 response = requests.get(img_url)
                 image_stream = BytesIO(response.content)
                 # Add image to slide
-                slide.shapes.add_picture(image_stream, Inches(1), Inches(1.5), width=Inches(8))
+                slide.shapes.add_picture(image_stream, Inches(0), Inches(1), width=Inches(15))
 
 # Save PP
 

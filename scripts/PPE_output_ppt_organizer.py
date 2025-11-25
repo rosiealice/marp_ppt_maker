@@ -14,7 +14,7 @@ subdir = 'OBS_comparison/ANN/'
 ppe_numbers=['000','003','005','009','019','021','024','030','032','039','041','042','048','058','059','064','065','069','072','073']
 
 DIRS = [f"{path}{num}/{subdir}" for num in ppe_numbers]
-COMMENTS = [num for num in ppe_numbers]   
+COMMENTS = [f"Ens #:{num}" for num in ppe_numbers]   
 
 VARS = ['LAI_MODIS',
     'FATES_GPP_FLUXCOM',
@@ -40,9 +40,9 @@ cmd = [
     '--pptx', OUTPUT_PPTX
 ]
 
-print('Running:', ' '.join(cmd))
+print("Running...")
 subprocess.run(cmd)
 
-print(COMMENTS)
+print("Done with making ppt!")
 
 
